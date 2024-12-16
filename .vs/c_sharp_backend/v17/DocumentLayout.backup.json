@@ -1,0 +1,90 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\senaa\\Desktop\\c_sharp_backend\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\senaa\\Desktop\\c_sharp_backend\\c_sharp_backend\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:c_sharp_backend\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\senaa\\Desktop\\c_sharp_backend\\c_sharp_backend\\Models\\Community.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:c_sharp_backend\\Models\\Community.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\senaa\\Desktop\\c_sharp_backend\\c_sharp_backend\\Config\\dbConfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:c_sharp_backend\\Config\\dbConfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\senaa\\Desktop\\c_sharp_backend\\c_sharp_backend\\appsettings.Development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:c_sharp_backend\\appsettings.Development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\senaa\\Desktop\\c_sharp_backend\\c_sharp_backend\\Program.cs",
+              "RelativeDocumentMoniker": "c_sharp_backend\\Program.cs",
+              "ToolTip": "C:\\Users\\senaa\\Desktop\\c_sharp_backend\\c_sharp_backend\\Program.cs",
+              "RelativeToolTip": "c_sharp_backend\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-14T12:40:50.484Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Community.cs",
+              "DocumentMoniker": "C:\\Users\\senaa\\Desktop\\c_sharp_backend\\c_sharp_backend\\Models\\Community.cs",
+              "RelativeDocumentMoniker": "c_sharp_backend\\Models\\Community.cs",
+              "ToolTip": "C:\\Users\\senaa\\Desktop\\c_sharp_backend\\c_sharp_backend\\Models\\Community.cs",
+              "RelativeToolTip": "c_sharp_backend\\Models\\Community.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-14T12:21:58.04Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Users\\senaa\\Desktop\\c_sharp_backend\\c_sharp_backend\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "c_sharp_backend\\appsettings.Development.json",
+              "ToolTip": "C:\\Users\\senaa\\Desktop\\c_sharp_backend\\c_sharp_backend\\appsettings.Development.json",
+              "RelativeToolTip": "c_sharp_backend\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-12-14T12:21:41.969Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "dbConfig.cs",
+              "DocumentMoniker": "C:\\Users\\senaa\\Desktop\\c_sharp_backend\\c_sharp_backend\\Config\\dbConfig.cs",
+              "RelativeDocumentMoniker": "c_sharp_backend\\Config\\dbConfig.cs",
+              "ToolTip": "C:\\Users\\senaa\\Desktop\\c_sharp_backend\\c_sharp_backend\\Config\\dbConfig.cs",
+              "RelativeToolTip": "c_sharp_backend\\Config\\dbConfig.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-14T12:06:39.191Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
