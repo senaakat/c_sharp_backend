@@ -1,25 +1,22 @@
-﻿using AutoMapper;
-using c_sharp_backend.DTO;
+﻿using c_sharp_backend.Config;
 using c_sharp_backend.DTOs;
 using c_sharp_backend.Interfaces;
+using c_sharp_backend.Mappers;
 using c_sharp_backend.Repository;
-using c_sharp.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace c_sharp_backend.Services;
 
 public class UserService : IUserInterface
 {
     private readonly UserRepository _userRepository;
-    private readonly IMapper _mapper;
+    private readonly UserMapper _userMapper;
     private readonly AppDbContext _dbContext;
 
-    public UserService(AppDbContext _dbContext,UserRepository userRepository, IMapper mapper)
+    public UserService(AppDbContext dbContext,UserRepository userRepository, UserMapper userMapper)
     {
         _userRepository = userRepository;
-        _mapper = mapper;
-        _dbContext = _dbContext;
+        _userMapper = userMapper;
+        _dbContext = dbContext;
     }
 
     public async Task<UserDTO?> GetUserOne(int id)
@@ -29,7 +26,7 @@ public class UserService : IUserInterface
             var user = await _userRepository.GetUserByIdAsync(id);
             if (user == null) return null;
 
-            return _mapper.Map<UserDTO>(user);
+            return UserMapper.MapUserToUserDto(user);
         }
         catch (Exception ex)
         {
@@ -43,7 +40,7 @@ public class UserService : IUserInterface
         try
         {
             var users = await _userRepository.GetAllUsersAsync();
-            return _mapper.Map<IEnumerable<UserDTO>>(users);
+            return  users.Select(user => UserMapper.MapUserToUserDto(user));
         }
         catch (Exception ex)
         {
@@ -63,9 +60,9 @@ public class UserService : IUserInterface
             {
                 throw new Exception($"User with Email {userDto.email} already exists.");
             }
-            var user = _mapper.Map<User>(userDto);
+            var user = _userMapper.MapUserDtoToUser(userDto);
             var createdUser = await _userRepository.AddUserAsync(user);
-            return _mapper.Map<UserDTO>(createdUser);
+            return UserMapper.MapUserToUserDto(createdUser);
         }
         catch (Exception ex)
         {
@@ -85,9 +82,14 @@ public class UserService : IUserInterface
                 throw new Exception("User not found.");
             }
 
-            _mapper.Map(userDto, existingUser);
+            existingUser.username = userDto.username;
+            existingUser.lastname = userDto.lastname;
+            existingUser.email = userDto.email;
+            existingUser.password = userDto.password;
+            
             var updatedUser = await _userRepository.UpdateUserAsync(existingUser);
-            return _mapper.Map<UserDTO>(updatedUser);
+            
+            return UserMapper.MapUserToUserDto(updatedUser);
         }
         catch (Exception ex)
         {

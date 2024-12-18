@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using c_sharp_backend.Config;
 
 #nullable disable
 
@@ -161,7 +162,7 @@ namespace c_sharp_backend.Migrations
                     b.ToTable("teachers");
                 });
 
-            modelBuilder.Entity("c_sharp.Models.User", b =>
+            modelBuilder.Entity("c_sharp_backend.Models.User", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()

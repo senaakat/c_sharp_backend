@@ -1,5 +1,4 @@
 ﻿using c_sharp_backend.DTOs;
-using c_sharp.Models;
 
 namespace c_sharp_backend.Interfaces;
 

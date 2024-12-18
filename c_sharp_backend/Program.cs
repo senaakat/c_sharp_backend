@@ -1,4 +1,7 @@
+using System.Text;
+using c_sharp_backend.Config;
 using c_sharp_backend.Interfaces;
+using c_sharp_backend.Mappers;
 using c_sharp_backend.Repository;
 using c_sharp_backend.Services;
 using Microsoft.EntityFrameworkCore;
@@ -13,15 +16,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(
         builder.Configuration.GetConnectionString("DefaultConnection"),
-        new MySqlServerVersion(new Version(8, 0, 25)) // MySQL sürümünü buraya ekleyin
+        new MySqlServerVersion(new Version(8, 0, 25)),
+        options => options.EnableRetryOnFailure()
     )
 );
 
-builder.Services.AddAutoMapper(typeof(Program));
-
+builder.Services.AddScoped<UserMapper>();
 builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<UserService>();
 

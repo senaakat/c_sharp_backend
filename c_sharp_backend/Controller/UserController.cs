@@ -1,7 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using c_sharp_backend.DTOs;
+﻿using c_sharp_backend.DTOs;
 using c_sharp_backend.Services;
-using c_sharp.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace c_sharp_backend.Controller;

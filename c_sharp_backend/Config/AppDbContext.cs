@@ -1,11 +1,12 @@
+using c_sharp_backend.Models;
 using c_sharp.Models;
 using Microsoft.EntityFrameworkCore;
 
+namespace c_sharp_backend.Config;
 public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-
-    // Modellerinizi buraya ekleyin
+    
     public DbSet<User> users { get; set; }
     public DbSet<ChatterCraft> chatterCraft { get; set; }
     public DbSet<Community> communities { get; set; }
