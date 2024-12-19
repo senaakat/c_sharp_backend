@@ -1,4 +1,4 @@
-﻿namespace c_sharp_backend.DTOs;
+﻿namespace c_sharp_backend.DTO;
 
 public class UserDto
 {

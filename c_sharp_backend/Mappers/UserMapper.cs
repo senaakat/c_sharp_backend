@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using c_sharp_backend.DTOs;
+using c_sharp_backend.DTO;
 using c_sharp_backend.Models;
 
 namespace c_sharp_backend.Mappers;

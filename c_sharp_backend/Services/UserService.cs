@@ -1,5 +1,5 @@
 ﻿using c_sharp_backend.Config;
-using c_sharp_backend.DTOs;
+using c_sharp_backend.DTO;
 using c_sharp_backend.Interfaces;
 using c_sharp_backend.Mappers;
 using c_sharp_backend.Repository;
@@ -10,16 +10,16 @@ public class UserService : IUserInterface
 {
     private readonly UserRepository _userRepository;
     private readonly UserMapper _userMapper;
-    private readonly AppDbContext _dbContext;
+    private readonly AppDbContext _appDbContext;
 
-    public UserService(AppDbContext dbContext,UserRepository userRepository, UserMapper userMapper)
+    public UserService(AppDbContext appDbContext,UserRepository userRepository, UserMapper userMapper)
     {
         _userRepository = userRepository;
         _userMapper = userMapper;
-        _dbContext = dbContext;
+        _appDbContext = appDbContext;
     }
 
-    public async Task<UserDto?> GetUserOne(String email)
+    public async Task<UserDto?> GetUserOne(string email)
     {
         try
         {
@@ -32,22 +32,6 @@ public class UserService : IUserInterface
         {
             // Log the exception
             throw new Exception($"An error occurred while retrieving user with id {email}.", ex);
-        }
-    }
-    
-    public async Task<UserDto?> GetUserId(int id)
-    {
-        try
-        {
-            var user = await _userRepository.GetUserByIdAsync(id);
-            if (user == null) return null;
-
-            return UserMapper.MapUserToUserDto(user);
-        }
-        catch (Exception ex)
-        {
-            // Log the exception
-            throw new Exception($"An error occurred while retrieving user with id {id}.", ex);
         }
     }
 
@@ -65,6 +49,21 @@ public class UserService : IUserInterface
         }
     }
 
+    public async Task<UserDto?> GetUserId(int id)
+    {
+        try
+        {
+            var user = await _userRepository.GetUserByIdAsync(id);
+            if (user == null) return null;
+
+            return UserMapper.MapUserToUserDto(user);
+        }
+        catch (Exception ex)
+        {
+            // Log the exception
+            throw new Exception($"An error occurred while retrieving user with id {id}.", ex);
+        }
+    }
 
     public async Task<UserDto?> AddUser(UserDto userDto)
     {

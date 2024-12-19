@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
+using c_sharp_backend.Models;
 
 namespace c_sharp.Models;
 //partial anahtar kelimesini kullanmasının amacı, User sınıfını birden fazla dosyada tanımlamak istemesidir.
@@ -11,5 +12,8 @@ public partial class Gossip {
     public string ? text { get; set; }
 
     public string ? image { get; set; }
+    
+    public int ? userId { get; set; }
+    public User ? user { get; set; }
 
 }

@@ -1,4 +1,4 @@
-﻿using c_sharp_backend.DTOs;
+﻿using c_sharp_backend.DTO;
 using c_sharp_backend.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +16,7 @@ public class UserController: ControllerBase
     }
 
     [HttpGet("{email}")]
-    public async Task<IActionResult> GetUser(String email)
+    public async Task<IActionResult> GetUser(string email)
     {
         try
         {
@@ -34,7 +34,7 @@ public class UserController: ControllerBase
         }
     }
 
-    [HttpGet("")]
+    [HttpGet("all")]
     public async Task<IActionResult> GetUsers()
     {
         try
