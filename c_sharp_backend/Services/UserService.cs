@@ -19,7 +19,23 @@ public class UserService : IUserInterface
         _dbContext = dbContext;
     }
 
-    public async Task<UserDTO?> GetUserOne(int id)
+    public async Task<UserDto?> GetUserOne(String email)
+    {
+        try
+        {
+            var user = await _userRepository.GetUserByEmail(email);
+            if (user == null) return null;
+
+            return UserMapper.MapUserToUserDto(user);
+        }
+        catch (Exception ex)
+        {
+            // Log the exception
+            throw new Exception($"An error occurred while retrieving user with id {email}.", ex);
+        }
+    }
+    
+    public async Task<UserDto?> GetUserId(int id)
     {
         try
         {
@@ -35,7 +51,7 @@ public class UserService : IUserInterface
         }
     }
 
-    public async Task<IEnumerable<UserDTO>> GetAllUsers()
+    public async Task<IEnumerable<UserDto>> GetAllUsers()
     {
         try
         {
@@ -50,7 +66,7 @@ public class UserService : IUserInterface
     }
 
 
-    public async Task<UserDTO?> AddUser(UserDTO userDto)
+    public async Task<UserDto?> AddUser(UserDto userDto)
     {
         try
         {
@@ -72,7 +88,7 @@ public class UserService : IUserInterface
         
     }
 
-    public async Task<UserDTO?> UpdateUser(UserDTO userDto, int id)
+    public async Task<UserDto?> UpdateUser(UserDto userDto, int id)
     {
         try
         {

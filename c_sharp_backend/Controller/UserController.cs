@@ -15,12 +15,12 @@ public class UserController: ControllerBase
         _userService = userService;
     }
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetUser(int id)
+    [HttpGet("{email}")]
+    public async Task<IActionResult> GetUser(String email)
     {
         try
         {
-            var user = await _userService.GetUserOne(id);
+            var user = await _userService.GetUserOne(email);
             if (user == null)
             {
                 return NotFound(new { message = "User not found." });
@@ -49,12 +49,17 @@ public class UserController: ControllerBase
     }
     
     [HttpPost("add")]
-    public async Task<IActionResult> CreateUser([FromBody] UserDTO userDto)
+    public async Task<IActionResult> CreateUser([FromBody] UserDto userDto)
     {
         try
         {
-            var user = await _userService.AddUser(userDto);
-            return CreatedAtAction(nameof(GetUser), new { email= user.email }, user);
+            var existingUser = await _userService.GetUserOne(userDto.email);
+            if (existingUser == null)
+            {
+                var user = await _userService.AddUser(userDto);
+                return CreatedAtAction(nameof(GetUser), new { email = user.email }, user);
+            }
+            return NotFound(new { message = "User already exist." });
         }
         catch (Exception ex)
         {
@@ -63,10 +68,21 @@ public class UserController: ControllerBase
     }
 
     [HttpPut("update/{id}")]
-    public async Task<IActionResult> UpdateUser([FromBody] UserDTO userDto,int id )
+    public async Task<IActionResult> UpdateUser([FromBody] UserDto userDto,int id )
     {
         try
         {
+            var existingUser = await _userService.GetUserId(id);
+            if (existingUser == null)
+            {
+                return NotFound(new { message = "User not found." });
+            }
+            
+            if (existingUser.email == userDto.email)
+            {
+                return BadRequest(new { message = "The email is already exist with this user." });
+            }
+
             var updatedUser = await _userService.UpdateUser(userDto, id);
             if (updatedUser == null)
             {
@@ -86,6 +102,12 @@ public class UserController: ControllerBase
     {
         try
         {
+            var existingUser = await _userService.GetUserId(id);
+            if (existingUser == null)
+            {
+                return NotFound(new { message = "User not found." });
+            }
+            
             await _userService.DeleteUser(id);
             return NoContent();
         }

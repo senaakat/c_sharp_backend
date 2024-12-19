@@ -1,9 +1,7 @@
 ﻿namespace c_sharp_backend.DTOs;
 
-public class UserDTO
+public class UserDto
 {
-    
-    public int id { get; set; }
     public string? username { get; set; }
 
     public string? lastname { get; set; }

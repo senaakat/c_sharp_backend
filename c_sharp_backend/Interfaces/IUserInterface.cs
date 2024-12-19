@@ -4,12 +4,14 @@ namespace c_sharp_backend.Interfaces;
 
 public interface IUserInterface
 {
-    Task<IEnumerable<UserDTO>> GetAllUsers();
+    Task<IEnumerable<UserDto>> GetAllUsers();
     
-    Task<UserDTO?> GetUserOne(int id);
-    Task<UserDTO?> AddUser(UserDTO userDto);
+    Task<UserDto?> GetUserOne(String email);
     
-    Task<UserDTO?> UpdateUser(UserDTO userDto, int id);
+    Task<UserDto?> GetUserId(int id);
+    Task<UserDto?> AddUser(UserDto userDto);
+    
+    Task<UserDto?> UpdateUser(UserDto userDto, int id);
 
     Task DeleteUser(int id);
 }

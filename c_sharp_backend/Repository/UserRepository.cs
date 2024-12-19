@@ -14,6 +14,9 @@ public class UserRepository
 
         public async Task<IEnumerable<User>> GetAllUsersAsync() =>
             await _appDbContext.Set<User>().ToListAsync();
+        
+        public async Task<User?> GetUserByEmail(String email) =>
+            await _appDbContext.Set<User>().FirstOrDefaultAsync(u => u.email == email);
 
         public async Task<User?> GetUserByIdAsync(int id) =>
             await _appDbContext.Set<User>().FirstOrDefaultAsync(u => u.id == id);
