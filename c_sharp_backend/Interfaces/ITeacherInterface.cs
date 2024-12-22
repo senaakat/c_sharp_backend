@@ -7,7 +7,7 @@ public interface ITeacherInterface
     Task ChangeUserRoleToTeacherAsync(int userId);
     Task<IEnumerable<TeacherDto>> GetAllTeachers();
     Task<TeacherDto?> GetTeacherId(int id);
-    Task<TeacherDto?> AddTeacher(TeacherDto userDto);
+    Task<TeacherDto?> AddTeacher(int userId,TeacherDto userDto);
     
     Task<TeacherDto?> UpdateTeacher(TeacherDto userDto, int id);
 

@@ -12,9 +12,6 @@ public partial class Lesson {
     public int ? teacherId { get; set; }
     public Teacher ? teacher { get; set; }
 
-    public ICollection < LessonPdf > ? lessonPdf { get; set; }
+    public ICollection < LessonPdf? >?  lessonPdf { get; set; }
 
 }
-
-//teacher ilişkisi
-// pdf ilişkisi

@@ -61,13 +61,14 @@ public class TeacherController:ControllerBase
             }
         }
         
-        [HttpPost("add")]
-        public async Task<IActionResult> AddTeacher([FromBody] TeacherDto teacherDto)
+        [HttpPost("add/{userId}")]
+        public async Task<IActionResult> AddTeacher(int userId,[FromBody] TeacherDto teacherDto)
         {
             try
             {
-                var createdTeacher = await _teacherService.AddTeacher(teacherDto);
-                return CreatedAtAction(nameof(GetTeacherById), new { id = createdTeacher.UserId }, createdTeacher);
+                
+                var createdTeacher = await _teacherService.AddTeacher(userId,teacherDto);
+                return CreatedAtAction(nameof(GetTeacherById), new { userId = createdTeacher.UserId }, createdTeacher);
             }
             catch (Exception ex)
             {

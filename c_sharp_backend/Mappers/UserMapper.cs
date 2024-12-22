@@ -6,10 +6,8 @@ namespace c_sharp_backend.Mappers;
 
 public class UserMapper:Profile
 {
-    public static UserDto MapUserToUserDto(User user)
+    public UserDto MapUserToUserDto(User user)
     {
-        if (user == null) return null;
-    
         return new UserDto
         { 
             username = user.username,
@@ -22,8 +20,6 @@ public class UserMapper:Profile
    
     public User MapUserDtoToUser(UserDto userDto)
     {
-        if (userDto == null) return null;
-    
         return new User
         {
             username = userDto.username,

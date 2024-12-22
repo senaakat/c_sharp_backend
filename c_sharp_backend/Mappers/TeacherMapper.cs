@@ -5,7 +5,7 @@ namespace c_sharp_backend.Mappers;
 
 public class TeacherMapper
 {
-    public static TeacherDto MapTeacherToTeacherDto(Teacher teacher)
+    public TeacherDto MapTeacherToTeacherDto(Teacher teacher)
     {
         return new TeacherDto
         {
@@ -14,7 +14,7 @@ public class TeacherMapper
         };
     }
 
-    public static Teacher MapUserDtoTeacher(TeacherDto teacherDto)
+    public Teacher MapUserDtoTeacher(TeacherDto teacherDto)
     {
         return new Teacher
         {

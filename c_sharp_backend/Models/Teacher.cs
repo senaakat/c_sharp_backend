@@ -4,9 +4,7 @@ using c_sharp_backend.Models;
 
 namespace c_sharp.Models;
 
-//partial anahtar kelimesini kullanmasının amacı, User sınıfını birden fazla dosyada tanımlamak istemesidir.
-// veri tipinden sonra ? kullanmasının nedeni, bu veri tipinin null olabileceğini belirtmektir.
-public partial class Teacher:User {
+public partial class Teacher {
 
     public int id { get; set; }
 
@@ -17,6 +15,6 @@ public partial class Teacher:User {
     public ICollection < LessonPdf > ? lessonPdfs { get; set; }
     
     public int ? userId { get; set; }
-    public User ? user { get; set; }
+    public User user { get; set; }
 
 }

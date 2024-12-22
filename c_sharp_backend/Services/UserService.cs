@@ -1,5 +1,4 @@
-﻿using c_sharp_backend.Config;
-using c_sharp_backend.DTO;
+﻿using c_sharp_backend.DTO;
 using c_sharp_backend.Interfaces;
 using c_sharp_backend.Mappers;
 using c_sharp_backend.Repository;
@@ -10,13 +9,11 @@ public class UserService : IUserInterface
 {
     private readonly UserRepository _userRepository;
     private readonly UserMapper _userMapper;
-    private readonly AppDbContext _appDbContext;
 
-    public UserService(AppDbContext appDbContext,UserRepository userRepository, UserMapper userMapper)
+    public UserService(UserRepository userRepository, UserMapper userMapper)
     {
         _userRepository = userRepository;
         _userMapper = userMapper;
-        _appDbContext = appDbContext;
     }
 
     public async Task<UserDto?> GetUserOne(string email)
@@ -26,7 +23,7 @@ public class UserService : IUserInterface
             var user = await _userRepository.GetUserByEmail(email);
             if (user == null) return null;
 
-            return UserMapper.MapUserToUserDto(user);
+            return _userMapper.MapUserToUserDto(user);
         }
         catch (Exception ex)
         {
@@ -40,7 +37,7 @@ public class UserService : IUserInterface
         try
         {
             var users = await _userRepository.GetAllUsersAsync();
-            return  users.Select(user => UserMapper.MapUserToUserDto(user));
+            return  users.Select(user => _userMapper.MapUserToUserDto(user));
         }
         catch (Exception ex)
         {
@@ -56,7 +53,7 @@ public class UserService : IUserInterface
             var user = await _userRepository.GetUserByIdAsync(id);
             if (user == null) return null;
 
-            return UserMapper.MapUserToUserDto(user);
+            return _userMapper.MapUserToUserDto(user);
         }
         catch (Exception ex)
         {
@@ -75,9 +72,15 @@ public class UserService : IUserInterface
             {
                 throw new Exception($"User with Email {userDto.email} already exists.");
             }
+            if (string.IsNullOrEmpty(userDto.password))
+            {
+                throw new Exception("Password cannot be null or empty.");
+            }
+            userDto.password = BCrypt.Net.BCrypt.HashPassword(userDto.password);
+
             var user = _userMapper.MapUserDtoToUser(userDto);
             var createdUser = await _userRepository.AddUserAsync(user);
-            return UserMapper.MapUserToUserDto(createdUser);
+            return _userMapper.MapUserToUserDto(createdUser);
         }
         catch (Exception ex)
         {
@@ -104,7 +107,7 @@ public class UserService : IUserInterface
             
             var updatedUser = await _userRepository.UpdateUserAsync(existingUser);
             
-            return UserMapper.MapUserToUserDto(updatedUser);
+            return _userMapper.MapUserToUserDto(updatedUser);
         }
         catch (Exception ex)
         {
