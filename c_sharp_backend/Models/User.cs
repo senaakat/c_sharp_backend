@@ -1,4 +1,5 @@
-﻿using c_sharp.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using c_sharp.Models;
 
 namespace c_sharp_backend.Models;
 
@@ -6,28 +7,36 @@ namespace c_sharp_backend.Models;
 // veri tipinden sonra ? kullanmasının nedeni, bu veri tipinin null olabileceğini belirtmektir.
 public partial class User {
 
-    
+    [Key]
     public int id { get; set; }
 
-    public string? username { get; set; }
+    [Required]
+    [MaxLength(10)]
+    public string? Username { get; set; }
 
-    public string? lastname { get; set; }
+    [Required]
+    [MaxLength(15)]
+    public string? Lastname { get; set; }
 
-    public string? email { get; set; }
-    public string? password { get; set; }
+    [Required]
+    public string? Email { get; set; }
+    
+    [Required]
+    [MaxLength(15)]
+    public string? Password { get; set; }
 
-    public Role role { get; set; } = Role.USER;
+    public Role Role { get; set; } = Role.User;
     
-    public ICollection < Teacher > ? teachers { get; set; }
+    public ICollection < Teacher > ? Teachers { get; set; }
     
-    public ICollection < Gossip > ? gossips { get; set; }
+    public ICollection < Gossip > ? Gossips { get; set; }
     
-    public ICollection < ChatterCraft > ? chatterCraft { get; set; }
+    public ICollection < ChatterCraft > ? ChatterCraft { get; set; }
 
 }
 
 public enum Role {
-    USER,
-    TEACHER,
-    ADMIN
+    User,
+    Teacher,
+    Admin
 }

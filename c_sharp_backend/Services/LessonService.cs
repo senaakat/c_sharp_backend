@@ -40,14 +40,14 @@ public class LessonService: ILessonInterface
             throw new Exception("All Lesson Not found", ex);
         }
     }
-    public async Task<LessonDto> AddLesson(string lessonName,LessonDto lessonDto)
+    public async Task<LessonDto> AddLesson(LessonDto lessonDto)
     {
         try
         {
-            var existinglesson = _lessonRepository.GetByLessonNameAsync(lessonName);
+            var existinglesson = await _lessonRepository.GetByLessonNameAsync(lessonDto.LessonName);
             if (existinglesson != null)
             {
-                throw new Exception($"Lesson with name {lessonName} already exists");
+                throw new Exception($"Lesson with name {lessonDto.LessonName} already exists");
             }
 
             var lesson = _lessonMapper.MapLessonDtoToLesson(lessonDto);
@@ -57,7 +57,7 @@ public class LessonService: ILessonInterface
         }
         catch (Exception ex)
         {
-            throw new Exception("Lesson not added", ex);
+            throw new Exception($"Error adding lesson with name {lessonDto.LessonName}: {ex.Message}", ex);
         }
     }
     public async Task<LessonDto> UpdateLesson(LessonDto lessonDto)

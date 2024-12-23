@@ -1,20 +1,22 @@
 ﻿using System.Collections.Generic;
 using System;
+using System.ComponentModel.DataAnnotations;
 using c_sharp_backend.Models;
 
 namespace c_sharp.Models;
 
 public partial class Teacher {
 
-    public int id { get; set; }
+    [Key]
+    public int Id { get; set; }
 
-    public string ? teacherGithub { get; set; }
+    public string ? TeacherGithub { get; set; }
 
-    public ICollection < Lesson > ? lessons { get; set; }
+    public ICollection < Lesson > ? Lessons { get; set; }
 
-    public ICollection < LessonPdf > ? lessonPdfs { get; set; }
+    public ICollection < LessonPdf > ? LessonPdfs { get; set; }
     
-    public int ? userId { get; set; }
-    public User user { get; set; }
+    public int ? UserId { get; set; }
+    public User User { get; set; }
 
 }

@@ -18,9 +18,9 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody] UserDto userDto)
+    public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
     {
-        var token = await _authService.Login(userDto.email, userDto.password);
+        var token = await _authService.Login(loginDto.Email, loginDto.Password);
 
         if (token == null)
         {

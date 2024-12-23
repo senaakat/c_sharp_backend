@@ -10,10 +10,10 @@ public class UserMapper:Profile
     {
         return new UserDto
         { 
-            username = user.username,
-            lastname = user.lastname,
-            password = user.password,
-            email = user.email
+            username = user.Username,
+            lastname = user.Lastname,
+            password = user.Password,
+            email = user.Email
             
         };
     }
@@ -22,10 +22,10 @@ public class UserMapper:Profile
     {
         return new User
         {
-            username = userDto.username,
-            lastname = userDto.lastname,
-            password = userDto.password,
-            email = userDto.email
+            Username = userDto.username,
+            Lastname = userDto.lastname,
+            Password = userDto.password,
+            Email = userDto.email
         };
     }
     

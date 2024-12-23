@@ -16,16 +16,16 @@ public class TeacherRepository
     public async Task<Teacher> GetByIdAsync(int id)
     {
         return await _appDbContext.teachers
-            .Include(t => t.user) 
-            .Include(t => t.lessons)
-            .Include(t => t.lessonPdfs) 
-            .FirstOrDefaultAsync(t => t.id == id) ?? throw new InvalidOperationException();
+            .Include(t => t.User) 
+            .Include(t => t.Lessons)
+            .Include(t => t.LessonPdfs) 
+            .FirstOrDefaultAsync(t => t.Id == id) ?? throw new InvalidOperationException();
     }
     
     public async Task<IEnumerable<Teacher>> GetAllAsync()
     {
         return await _appDbContext.teachers
-            .Include(t => t.user)
+            .Include(t => t.User)
             .ToListAsync();
     }
     

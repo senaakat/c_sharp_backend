@@ -28,24 +28,23 @@ public class AuthService
         _userMapper = userMapper;
     }
 
-    public async Task<string?> Login(string username, string password)
+    public async Task<string?> Login(string email, string password)
     {
         var user = await _appDbContext.users
-            .FirstOrDefaultAsync(u => u.username == username);
+            .FirstOrDefaultAsync(u => u.Email.ToLower() == email.Trim().ToLower());
 
-        if (user == null || user.password != password)
+        if (user == null || !BCrypt.Net.BCrypt.Verify(password, user.Password))
         {
             return null; 
         }
-
-        // JWT token oluşturma
+    
         var claims = new[]
         {
-            new Claim(ClaimTypes.Name, user.username),
-            new Claim(ClaimTypes.Surname, user.lastname),
-            new Claim(ClaimTypes.Email, user.email),
+            new Claim(ClaimTypes.Name, user.Username),
+            new Claim(ClaimTypes.Surname, user.Lastname),
+            new Claim(ClaimTypes.Email, user.Email),
             new Claim(ClaimTypes.NameIdentifier, user.id.ToString()),
-            new Claim(ClaimTypes.Role, user.role.ToString())
+            new Claim(ClaimTypes.Role, user.Role.ToString())
         };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:SecretKey"]));
@@ -66,7 +65,7 @@ public class AuthService
         try
         {
             var existingUser = await _appDbContext.users
-                .FirstOrDefaultAsync(u => u.username == userDto.username || u.email == userDto.email);
+                .FirstOrDefaultAsync(u => u.Username == userDto.username || u.Email == userDto.email);
             if (existingUser != null)
             {
                 throw new Exception("User already exists.");

@@ -1,17 +1,20 @@
 using System.Collections.Generic;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace c_sharp.Models;
 
 public partial class Community {
+    
+    [Key]
     public int id { get; set; }
 
-    public string ? communityName { get; set; }
+    public string ? CommunityName { get; set; }
 
-    public string ? image { get; set; }
+    public string ? Image { get; set; }
 
-    public string ? shortName { get; set; }
+    public string ? ShortName { get; set; }
 
-    public string ? text { get; set; }
+    public string ? Text { get; set; }
 
 }

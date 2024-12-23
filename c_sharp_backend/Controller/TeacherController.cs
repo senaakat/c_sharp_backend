@@ -9,10 +9,13 @@ namespace c_sharp_backend.Controller;
 public class TeacherController:ControllerBase
 {
     private readonly TeacherService _teacherService;
+    private readonly UserService _userService;
+    private readonly UserController _userController;
 
-    public TeacherController(TeacherService teacherService)
+    public TeacherController(TeacherService teacherService,UserService userService)
     {
         _teacherService = teacherService;
+        _userService = userService;
     }
     
     [HttpPut("changeRoleToTeacher/{userId}")]
@@ -60,22 +63,7 @@ public class TeacherController:ControllerBase
                 return BadRequest(new { message = ex.Message });
             }
         }
-        
-        [HttpPost("add/{userId}")]
-        public async Task<IActionResult> AddTeacher(int userId,[FromBody] TeacherDto teacherDto)
-        {
-            try
-            {
-                
-                var createdTeacher = await _teacherService.AddTeacher(userId,teacherDto);
-                return CreatedAtAction(nameof(GetTeacherById), new { userId = createdTeacher.UserId }, createdTeacher);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
-        }
-        
+
         [HttpPut("update/{id}")]
         public async Task<IActionResult> UpdateTeacher(int id, [FromBody] TeacherDto teacherDto)
         {

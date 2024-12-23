@@ -65,8 +65,26 @@ public class UserController: ControllerBase
         {
             return BadRequest(new { message = ex.Message });
         }
+    } 
+    
+    [HttpPost("addAsTeacher")]
+    public async Task<ActionResult<UserDto>> AddUserAsTeacher([FromBody] UserDto userDto)
+    {
+        try
+        {
+            var existingUser = await _userService.GetUserOne(userDto.email);
+            if (existingUser == null)
+            {
+                var user = await _userService.AddUserAsTeacher(userDto);
+                return CreatedAtAction(nameof(GetUser), new { email = user.email }, user);
+            }
+            return NotFound(new { message = "User already exist." });
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { message = ex.Message });
+        }
     }
-
     [HttpPut("update/{id}")]
     public async Task<IActionResult> UpdateUser([FromBody] UserDto userDto,int id )
     {

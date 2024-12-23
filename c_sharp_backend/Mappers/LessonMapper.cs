@@ -9,8 +9,8 @@ public class LessonMapper
     {
         return new LessonDto
         {
-            LessonName = lesson.lessonName,
-            TeacherId = lesson.teacherId,
+            LessonName = lesson.LessonName,
+            TeacherId = lesson.TeacherId,
         };
     }
 
@@ -18,8 +18,8 @@ public class LessonMapper
     {
         return new Lesson
         {
-            lessonName = lessonDto.LessonName,
-            teacherId = lessonDto.TeacherId
+            LessonName = lessonDto.LessonName,
+            TeacherId = lessonDto.TeacherId
         };
     }
 }

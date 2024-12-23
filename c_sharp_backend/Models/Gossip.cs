@@ -1,19 +1,19 @@
 ﻿using System.Collections.Generic;
 using System;
+using System.ComponentModel.DataAnnotations;
 using c_sharp_backend.Models;
 
 namespace c_sharp.Models;
-//partial anahtar kelimesini kullanmasının amacı, User sınıfını birden fazla dosyada tanımlamak istemesidir.
-// veri tipinden sonra ? kullanmasının nedeni, bu veri tipinin null olabileceğini belirtmektir.
 public partial class Gossip {
 
-    public int id { get; set; }
+    [Key]
+    public int Id { get; set; }
 
-    public string ? text { get; set; }
+    public string ? Text { get; set; }
 
-    public string ? image { get; set; }
+    public string ? Image { get; set; }
     
-    public int ? userId { get; set; }
-    public User ? user { get; set; }
+    public int ? UserId { get; set; }
+    public User ? User { get; set; }
 
 }

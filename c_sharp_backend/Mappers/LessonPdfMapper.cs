@@ -10,9 +10,9 @@ public class LessonPdfMapper
     {
         return new LessonPdfDto
         {
-            pdfName = lessonPdf.pdfName,
-            lessonId = lessonPdf.lessonId,
-            teacherId = lessonPdf.teacherId
+            pdfName = lessonPdf.PdfName,
+            lessonId = lessonPdf.LessonId,
+            teacherId = lessonPdf.TeacherId
             
         };
     }
@@ -21,9 +21,9 @@ public class LessonPdfMapper
     {
         return new LessonPdf
         {
-            pdfName = lessonDto.pdfName,
-            lessonId = lessonDto.lessonId,
-            teacherId = lessonDto.teacherId
+            PdfName = lessonDto.pdfName,
+            LessonId = lessonDto.lessonId,
+            TeacherId = lessonDto.teacherId
             
         };
     }

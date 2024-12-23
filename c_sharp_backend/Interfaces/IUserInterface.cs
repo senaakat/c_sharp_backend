@@ -10,6 +10,8 @@ public interface IUserInterface
     
     Task<UserDto?> GetUserId(int id);
     Task<UserDto?> AddUser(UserDto userDto);
+
+    Task<UserDto?> AddUserAsTeacher(UserDto userDto);
     
     Task<UserDto?> UpdateUser(UserDto userDto, int id);
 

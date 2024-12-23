@@ -53,7 +53,7 @@ public class LessonController: ControllerBase
     {
         try
         {
-            var createdLesson = await _lessonService.AddLesson(lessonDto.LessonName!, lessonDto);
+            var createdLesson = await _lessonService.AddLesson(lessonDto);
             return CreatedAtAction(nameof(GetLesson), new { id = createdLesson.LessonName }, createdLesson);
         }
         catch (Exception ex)

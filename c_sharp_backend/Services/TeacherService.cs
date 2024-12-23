@@ -30,12 +30,12 @@ public class TeacherService: ITeacherInterface
             throw new Exception("User not found.");
         }
         
-        user.role = Role.TEACHER;
+        user.Role = Role.Teacher;
         
         var teacher = new Teacher
         {
-            userId = userId,
-            teacherGithub = null
+            UserId = userId,
+            TeacherGithub = null
         };
         
         await _teacherRepository.AddAsync(teacher);
@@ -58,8 +58,8 @@ public class TeacherService: ITeacherInterface
     {
         
         var teacher = _teacherMapper.MapUserDtoTeacher(teacherDTO);
-        teacher.userId = userId;
-        teacher.teacherGithub=teacherDTO.TeacherGithub;
+        teacher.UserId = userId;
+        teacher.TeacherGithub=teacherDTO.TeacherGithub;
         await _teacherRepository.AddAsync(teacher);
         return _teacherMapper.MapTeacherToTeacherDto(teacher);
     }
@@ -67,7 +67,7 @@ public class TeacherService: ITeacherInterface
     public async Task<TeacherDto?> UpdateTeacher(TeacherDto teacherDTO,int id)
     {
         var teacher = _teacherMapper.MapUserDtoTeacher(teacherDTO);
-        teacher.id = id; // Güncellemelerde id atanır
+        teacher.Id = id;
         await _teacherRepository.UpdateAsync(teacher);
         return _teacherMapper.MapTeacherToTeacherDto(teacher);
     }

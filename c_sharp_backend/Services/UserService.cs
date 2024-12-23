@@ -1,18 +1,23 @@
 ﻿using c_sharp_backend.DTO;
 using c_sharp_backend.Interfaces;
 using c_sharp_backend.Mappers;
+using c_sharp_backend.Models;
 using c_sharp_backend.Repository;
+using c_sharp.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace c_sharp_backend.Services;
 
 public class UserService : IUserInterface
 {
     private readonly UserRepository _userRepository;
+    private readonly TeacherRepository _teacherRepository;
     private readonly UserMapper _userMapper;
 
-    public UserService(UserRepository userRepository, UserMapper userMapper)
+    public UserService(UserRepository userRepository,TeacherRepository teacherRepository, UserMapper userMapper)
     {
         _userRepository = userRepository;
+        _teacherRepository = teacherRepository;
         _userMapper = userMapper;
     }
 
@@ -27,7 +32,6 @@ public class UserService : IUserInterface
         }
         catch (Exception ex)
         {
-            // Log the exception
             throw new Exception($"An error occurred while retrieving user with id {email}.", ex);
         }
     }
@@ -41,7 +45,6 @@ public class UserService : IUserInterface
         }
         catch (Exception ex)
         {
-            // Log the exception
             throw new Exception("An error occurred while retrieving users.", ex);
         }
     }
@@ -57,7 +60,6 @@ public class UserService : IUserInterface
         }
         catch (Exception ex)
         {
-            // Log the exception
             throw new Exception($"An error occurred while retrieving user with id {id}.", ex);
         }
     }
@@ -66,7 +68,6 @@ public class UserService : IUserInterface
     {
         try
         {
-            // Veritabanında email ile eşleşen kullanıcı var mı kontrol et
             var existingUser = await _userRepository.GetUserByEmailAsync(userDto.email);
             if (existingUser != null)
             {
@@ -88,7 +89,45 @@ public class UserService : IUserInterface
             throw new Exception("An error occurred while adding the user.", ex);
         }
         
+    }  
+    [HttpPost("/addAsTeacher")]
+    public async Task<UserDto?> AddUserAsTeacher(UserDto userDto)
+    {
+        try
+        {
+            var existingUser = await _userRepository.GetUserByEmailAsync(userDto.email);
+            if (existingUser != null)
+            {
+                throw new Exception($"User with Email {userDto.email} already exists.");
+            }
+            if (string.IsNullOrEmpty(userDto.password))
+            {
+                throw new Exception("Password cannot be null or empty.");
+            }
+            userDto.password = BCrypt.Net.BCrypt.HashPassword(userDto.password);
+            
+            var user = _userMapper.MapUserDtoToUser(userDto);
+
+            user.Role = Role.Teacher;
+
+            var createdUser = await _userRepository.AddUserAsync(user);
+            
+            var teacher = new Teacher
+            {
+                UserId = createdUser.id,
+            };
+            
+            await _teacherRepository.AddAsync(teacher);
+            
+            return _userMapper.MapUserToUserDto(createdUser);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}, Details: {ex.InnerException?.Message}");
+            throw new Exception("An error occurred while adding the user.", ex);
+        }
     }
+
 
     public async Task<UserDto?> UpdateUser(UserDto userDto, int id)
     {
@@ -100,10 +139,10 @@ public class UserService : IUserInterface
                 throw new Exception("User not found.");
             }
 
-            existingUser.username = userDto.username;
-            existingUser.lastname = userDto.lastname;
-            existingUser.email = userDto.email;
-            existingUser.password = userDto.password;
+            existingUser.Username = userDto.username;
+            existingUser.Lastname = userDto.lastname;
+            existingUser.Email = userDto.email;
+            existingUser.Password = userDto.password;
             
             var updatedUser = await _userRepository.UpdateUserAsync(existingUser);
             
@@ -129,7 +168,6 @@ public class UserService : IUserInterface
         }
         catch (Exception ex)
         {
-            // Log the exception
             throw new Exception($"An error occurred while deleting user with id {id}.", ex);
         }
     }

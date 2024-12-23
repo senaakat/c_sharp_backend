@@ -74,6 +74,12 @@ builder.Services.AddScoped<TeacherMapper>();
 builder.Services.AddScoped<TeacherRepository>();
 builder.Services.AddScoped<TeacherService>();
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<LessonMapper>();
+builder.Services.AddScoped<LessonRepository>();
+builder.Services.AddScoped<LessonService>();
+builder.Services.AddScoped<LessonPdfMapper>();
+builder.Services.AddScoped<LessonPdfRepository>();
+builder.Services.AddScoped<LessonPdfService>();
 
 var app = builder.Build();
 

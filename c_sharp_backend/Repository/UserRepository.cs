@@ -16,12 +16,12 @@ public class UserRepository
             await _appDbContext.Set<User>().ToListAsync();
         
         public async Task<User?> GetUserByEmail(String email) =>
-            await _appDbContext.Set<User>().FirstOrDefaultAsync(u => u.email == email);
+            await _appDbContext.Set<User>().FirstOrDefaultAsync(u => u.Email == email);
 
         public async Task<User?> GetUserByIdAsync(int id) =>
-            await _appDbContext.Set<User>().FirstOrDefaultAsync(u => u.id == id);
+            await _appDbContext.Set<User>().FirstOrDefaultAsync(u => u.id== id);
         public async Task<User?> GetUserByEmailAsync(string email) =>
-            await _appDbContext.Set<User>().FirstOrDefaultAsync(u => u.email == email);
+            await _appDbContext.Set<User>().FirstOrDefaultAsync(u => u.Email == email);
 
         public async Task<User> AddUserAsync(User user)
         {

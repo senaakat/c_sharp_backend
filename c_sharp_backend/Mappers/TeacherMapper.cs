@@ -9,8 +9,8 @@ public class TeacherMapper
     {
         return new TeacherDto
         {
-            TeacherGithub = teacher.teacherGithub,
-            UserId = teacher.userId
+            TeacherGithub = teacher.TeacherGithub,
+            UserId = teacher.UserId
         };
     }
 
@@ -18,8 +18,8 @@ public class TeacherMapper
     {
         return new Teacher
         {
-            teacherGithub = teacherDto.TeacherGithub,
-            userId = teacherDto.UserId
+            TeacherGithub = teacherDto.TeacherGithub,
+            UserId = teacherDto.UserId
         };
     }
 }

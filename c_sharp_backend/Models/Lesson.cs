@@ -1,17 +1,19 @@
 ﻿using System.Collections.Generic;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace c_sharp.Models;
 
 public partial class Lesson {
 
-    public int id { get; set; }
+    [Key]
+    public int Id { get; set; }
 
-    public string ? lessonName { get; set; }
+    public string ? LessonName { get; set; }
 
-    public int ? teacherId { get; set; }
-    public Teacher ? teacher { get; set; }
+    public int ? TeacherId { get; set; }
+    public Teacher ? Teacher { get; set; }
 
-    public ICollection < LessonPdf? >?  lessonPdf { get; set; }
+    public ICollection < LessonPdf? >?  LessonPdfs { get; set; }
 
 }

@@ -16,29 +16,29 @@ public class LessonPdfRepository
     public async Task<LessonPdf> GetByPdfIdAsync(int id)
     {
         return await _appDbContext.lessonPdfs
-            .Include(l => l.pdfName)
-            .Include(l=>l.lessonId)
-            .Include(l => l.teacherId)
-            .FirstOrDefaultAsync(l => l.id == id) ?? throw new InvalidOperationException();
+            .Include(l => l.PdfName)
+            .Include(l=>l.LessonId)
+            .Include(l => l.TeacherId)
+            .FirstOrDefaultAsync(l => l.Id == id) ?? throw new InvalidOperationException();
     }
     
     
     public async Task<IEnumerable<LessonPdf>> GetAllPdfsAsync()
     {
         return await _appDbContext.lessonPdfs
-            .Include(l => l.pdfName)
-            .Include(l=>l.lessonId)
-            .Include(l => l.teacherId)
+            .Include(l => l.PdfName)
+            .Include(l=>l.LessonId)
+            .Include(l => l.TeacherId)
             .ToListAsync();
     }
     
     public async Task<LessonPdf> GetByPdfNameAsync(string lessonName)
     {
         return await _appDbContext.lessonPdfs
-            .Include(l => l.pdfName)
-            .Include(l=>l.lessonId)
-            .Include(l => l.teacherId)
-            .FirstOrDefaultAsync(l => l.pdfName == lessonName) ?? throw new InvalidOperationException();
+            .Include(l => l.PdfName)
+            .Include(l=>l.LessonId)
+            .Include(l => l.TeacherId)
+            .FirstOrDefaultAsync(l => l.PdfName == lessonName) ?? throw new InvalidOperationException();
     }
     
     public async Task<LessonPdf> AddPdfAsync(LessonPdf lessonPdf)
