@@ -1,4 +1,4 @@
-﻿using c_sharp_backend.DTO;
+﻿﻿using c_sharp_backend.DTO;
 using c_sharp_backend.Interfaces;
 using c_sharp_backend.Mappers;
 using c_sharp_backend.Repository;
@@ -15,7 +15,7 @@ public class LessonService: ILessonInterface
         _lessonRepository = lessonRepository;
         _lessonMapper = lessonMapper;
     }
-    
+
     public async Task<LessonDto> GetLessonById(int id)
     {
         try
@@ -26,6 +26,18 @@ public class LessonService: ILessonInterface
         catch (Exception ex)
         {
             throw new Exception($" Lesson not found with id {id}.", ex);
+        }
+    }
+    public async Task<LessonDto> GetLessonByName(string lessonName)
+    {
+        try
+        {
+            var lesson = await _lessonRepository.GetByLessonNameAsync(lessonName);
+            return _lessonMapper.MapLessonToLessonDto(lesson);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($" Lesson not found with {lessonName}.", ex);
         }
     }
     
@@ -42,6 +54,10 @@ public class LessonService: ILessonInterface
     }
     public async Task<LessonDto> AddLesson(LessonDto lessonDto)
     {
+        if (string.IsNullOrWhiteSpace(lessonDto.LessonName))
+        {
+            throw new Exception("Lesson name cannot be null or empty.");
+        }
         try
         {
             var existinglesson = await _lessonRepository.GetByLessonNameAsync(lessonDto.LessonName);
@@ -60,17 +76,23 @@ public class LessonService: ILessonInterface
             throw new Exception($"Error adding lesson with name {lessonDto.LessonName}: {ex.Message}", ex);
         }
     }
-    public async Task<LessonDto> UpdateLesson(LessonDto lessonDto)
+    public async Task<LessonDto> UpdateLesson(int id,LessonDto lessonDto)
     {
+        if (string.IsNullOrWhiteSpace(lessonDto.LessonName))
+        {
+            throw new Exception("Lesson name cannot be null or empty.");
+        }
         try
         {
-            var lesson = await _lessonRepository.GetByLessonNameAsync(lessonDto.LessonName!);
+            var lesson = await _lessonRepository.GetByLessonIdAsync(id);
             if (lesson == null)
             {
                 throw new Exception($"Lesson not found");
             }
-
-            lesson = _lessonMapper.MapLessonDtoToLesson(lessonDto);
+            
+            lesson.LessonName = lessonDto.LessonName;
+            lesson.TeacherId = lessonDto.TeacherId;
+            
             await _lessonRepository.UpdateAsync(lesson);
             return _lessonMapper.MapLessonToLessonDto(lesson);
         }

@@ -78,7 +78,7 @@ public class LessonPdfController : ControllerBase
                 return BadRequest(new { message = "The PDF name is already the same as the current one." });
             }
 
-            var updatedPdf = await _lessonPdfService.UpdatePdf(lessonPdfDto);
+            var updatedPdf = await _lessonPdfService.UpdatePdf(id,lessonPdfDto);
             return Ok(updatedPdf);
         }
         catch (Exception ex)

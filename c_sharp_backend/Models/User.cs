@@ -11,18 +11,17 @@ public partial class User {
     public int id { get; set; }
 
     [Required]
-    [MaxLength(10)]
+    [MaxLength(255)]
     public string? Username { get; set; }
 
     [Required]
-    [MaxLength(15)]
+    [MaxLength(255)]
     public string? Lastname { get; set; }
 
     [Required]
     public string? Email { get; set; }
     
     [Required]
-    [MaxLength(15)]
     public string? Password { get; set; }
 
     public Role Role { get; set; } = Role.User;

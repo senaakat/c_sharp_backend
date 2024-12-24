@@ -16,42 +16,44 @@ public class LessonPdfRepository
     public async Task<LessonPdf> GetByPdfIdAsync(int id)
     {
         return await _appDbContext.lessonPdfs
-            .Include(l => l.PdfName)
-            .Include(l=>l.LessonId)
-            .Include(l => l.TeacherId)
             .FirstOrDefaultAsync(l => l.Id == id) ?? throw new InvalidOperationException();
     }
     
     
     public async Task<IEnumerable<LessonPdf>> GetAllPdfsAsync()
     {
-        return await _appDbContext.lessonPdfs
-            .Include(l => l.PdfName)
-            .Include(l=>l.LessonId)
-            .Include(l => l.TeacherId)
-            .ToListAsync();
+        return await _appDbContext.lessonPdfs.ToListAsync();
     }
     
-    public async Task<LessonPdf> GetByPdfNameAsync(string lessonName)
+    public async Task<LessonPdf?> GetByPdfNameAsync(string pdfName)
     {
         return await _appDbContext.lessonPdfs
-            .Include(l => l.PdfName)
-            .Include(l=>l.LessonId)
-            .Include(l => l.TeacherId)
-            .FirstOrDefaultAsync(l => l.PdfName == lessonName) ?? throw new InvalidOperationException();
+            .FirstOrDefaultAsync(l => l.PdfName == pdfName);
     }
     
     public async Task<LessonPdf> AddPdfAsync(LessonPdf lessonPdf)
     {
-        await _appDbContext.lessonPdfs.AddAsync(lessonPdf);
-        await _appDbContext.SaveChangesAsync();
-        return lessonPdf;
+        try
+        {
+            await _appDbContext.lessonPdfs.AddAsync(lessonPdf);
+            await _appDbContext.SaveChangesAsync();
+            return lessonPdf;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Error saving the pdf to the database.", ex);
+        }
     }
 
     public async Task UpdatePdfAsync(LessonPdf lessonPdf)
     {
-        _appDbContext.lessonPdfs.Update(lessonPdf);
-        await _appDbContext.SaveChangesAsync();
+        try{
+            _appDbContext.lessonPdfs.Update(lessonPdf);
+            await _appDbContext.SaveChangesAsync();
+        }
+        catch(Exception ex){
+            throw new Exception("Error updating the pdf to the database.", ex);
+        }
     }
     
     public async Task DeletPdfAsync(int id)

@@ -19,4 +19,15 @@ public class AppDbContext : DbContext
     public DbSet<Lesson> lessons { get; set; }
     public DbSet<LessonPdf> lessonPdfs { get; set; }
     public DbSet<Teacher> teachers { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<Lesson>()
+            .HasOne(l => l.Teacher)
+            .WithMany(t => t.Lessons)
+            .HasForeignKey(l => l.TeacherId)
+            .OnDelete(DeleteBehavior.Cascade);
+    }
 }

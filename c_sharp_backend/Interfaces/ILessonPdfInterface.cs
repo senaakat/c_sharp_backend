@@ -7,6 +7,6 @@ public interface ILessonPdfInterface
     Task<LessonPdfDto> GetPdfById(int id);
     Task<List<LessonPdfDto>> GetAllPdfs();
     Task<LessonPdfDto> AddPdf(string pdfName,LessonPdfDto lessonPdfDto);
-    Task<LessonPdfDto> UpdatePdf(LessonPdfDto lessonPdfDto);
+    Task<LessonPdfDto> UpdatePdf(int id,LessonPdfDto lessonPdfDto);
     Task<bool> DeletePdf(int id);
 }

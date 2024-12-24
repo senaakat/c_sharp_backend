@@ -40,9 +40,13 @@ public class LessonPdfService
     }
     public async Task<LessonPdfDto> AddPdf(string pdfName,LessonPdfDto lessonPdfDto)
     {
+        if (string.IsNullOrWhiteSpace(lessonPdfDto.pdfName))
+        {
+            throw new Exception("Lesson name cannot be null or empty.");
+        }
         try
         {
-            var existinglessonPdf = _lessonPdfRepository.GetByPdfNameAsync(pdfName);
+            var existinglessonPdf = await _lessonPdfRepository.GetByPdfNameAsync(pdfName);
             if (existinglessonPdf != null)
             {
                 throw new Exception($"Pdf with name {pdfName} already exists");
@@ -58,17 +62,24 @@ public class LessonPdfService
             throw new Exception("Pdf not added", ex);
         }
     }
-    public async Task<LessonPdfDto> UpdatePdf(LessonPdfDto lessonPdfDto)
+    public async Task<LessonPdfDto> UpdatePdf(int id,LessonPdfDto lessonPdfDto)
     {
+        if (string.IsNullOrWhiteSpace(lessonPdfDto.pdfName))
+        {
+            throw new Exception("Lesson name cannot be null or empty.");
+        }
         try
         {
-            var lessonPdf = await _lessonPdfRepository.GetByPdfNameAsync(lessonPdfDto.pdfName!);
+            var lessonPdf = await _lessonPdfRepository.GetByPdfIdAsync(id);
             if (lessonPdf == null)
             {
                 throw new Exception($"Pdf not found");
             }
-
-            lessonPdf = _lessonPdfMapper.MapPdfDtoDtoToPdf(lessonPdfDto);
+            
+            lessonPdf.TeacherId = lessonPdfDto.teacherId;
+            lessonPdf.LessonId = lessonPdfDto.lessonId;
+            lessonPdf.PdfName = lessonPdfDto.pdfName;
+            
             await _lessonPdfRepository.UpdatePdfAsync(lessonPdf);
             return _lessonPdfMapper.MapPdfToPdfDto(lessonPdf);
         }

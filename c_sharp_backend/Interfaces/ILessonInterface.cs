@@ -7,6 +7,6 @@ public interface ILessonInterface
     Task<LessonDto> GetLessonById(int id);
     Task<List<LessonDto>> GetAllLessons();
     Task<LessonDto> AddLesson(LessonDto lessonDto);
-    Task<LessonDto> UpdateLesson(LessonDto lessonDto);
+    Task<LessonDto> UpdateLesson(int id,LessonDto lessonDto);
     Task<bool> DeleteLesson(int id);
 }

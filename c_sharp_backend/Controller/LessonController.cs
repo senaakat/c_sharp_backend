@@ -1,4 +1,4 @@
-﻿using c_sharp_backend.DTO;
+﻿﻿using c_sharp_backend.DTO;
 using c_sharp_backend.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,6 +33,25 @@ public class LessonController: ControllerBase
             return BadRequest(new { message = ex.Message });
         }
     }
+    
+    [HttpGet("ByName/{lessonName}")]
+    public async Task<IActionResult> GetLessonName(string lessonName)
+    {
+        try
+        {
+            var lesson = await _lessonService.GetLessonByName(lessonName);
+            if (lesson == null)
+            {
+                return NotFound(new { message = "Lesson not found." });
+            }
+
+            return Ok(lesson);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { message = ex.Message });
+        }
+    }
 
     [HttpGet("all")]
     public async Task<IActionResult> GetAllLessons()
@@ -54,7 +73,7 @@ public class LessonController: ControllerBase
         try
         {
             var createdLesson = await _lessonService.AddLesson(lessonDto);
-            return CreatedAtAction(nameof(GetLesson), new { id = createdLesson.LessonName }, createdLesson);
+            return CreatedAtAction(nameof(GetLessonName), new { lessonName = createdLesson.LessonName }, createdLesson);
         }
         catch (Exception ex)
         {
@@ -78,7 +97,7 @@ public class LessonController: ControllerBase
                 return BadRequest(new { message = "The lesson name is already the same as the current one." });
             }
 
-            var updatedLesson = await _lessonService.UpdateLesson(lessonDto);
+            var updatedLesson = await _lessonService.UpdateLesson(id,lessonDto);
             return Ok(updatedLesson);
         }
         catch (Exception ex)
