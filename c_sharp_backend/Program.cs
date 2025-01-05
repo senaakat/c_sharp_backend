@@ -80,6 +80,18 @@ builder.Services.AddScoped<LessonService>();
 builder.Services.AddScoped<LessonPdfMapper>();
 builder.Services.AddScoped<LessonPdfRepository>();
 builder.Services.AddScoped<LessonPdfService>();
+builder.Services.AddScoped<AnnouncementService>();
+builder.Services.AddScoped<AnnouncementRepository>();
+builder.Services.AddScoped<GossipRepository>();
+builder.Services.AddScoped<GossipService>();
+builder.Services.AddScoped<LikeMapper>();
+builder.Services.AddScoped<LikeRepository>();
+builder.Services.AddScoped<LikeService>();
+builder.Services.AddScoped<CommunityMapper>();
+builder.Services.AddScoped<CommunityRepository>();
+builder.Services.AddScoped<CommunityService>();
+builder.Services.AddScoped<ChatterCraftService>();
+builder.Services.AddScoped<ChatterCraftRepository>();
 
 var app = builder.Build();
 

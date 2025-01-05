@@ -19,6 +19,8 @@ public class AppDbContext : DbContext
     public DbSet<Lesson> lessons { get; set; }
     public DbSet<LessonPdf> lessonPdfs { get; set; }
     public DbSet<Teacher> teachers { get; set; }
+    
+    public DbSet<Like> likes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
